@@ -345,19 +345,22 @@ def print_ascii(ascii_array):
         print(row)
 
 
-def main(args):
+def ncurses_ascii():
+    import curses
+
+
+def main(args=""):
     from datetime import datetime
 
     time = [int(i) for i in datetime.now().strftime("%H %M").split()]
-    if args[0] == "-":
-        flags = args[1:]
-        if "c" in flags:
-            print_ascii(analog_clock(*time))
-        elif "d" in flags:
-            print_ascii(digital_watch(*time))
-    else:
-        print_ascii(analog_clock(*time))
+    clock = digital_watch if "d" in args else analog_clock
+    display = ncurses_ascii if "n" in args else print_ascii
+    display(clock(*time))
+
 
 if __name__ == "__main__":
     import sys
-    main(sys.argv[1] if len(sys.argv) > 1 else " ")
+    if len(sys.argv) > 1 and sys.argv[1].startswith("-"):
+        main(sys.argv[1][1:])
+    else:
+        main()
