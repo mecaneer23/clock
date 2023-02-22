@@ -21,7 +21,7 @@ clock
 | **-a** | Analog clock, this is the default.                             |
 | **-d** | Digital watch clock face. This is easier to read but less cool |
 | **-n** | Use Ncurses to display the time instead of printing.           |
-| **-p** | Print the time to stdout.                                      |
+| **-p** | Print the time to stdout. This is the default                  |
 
 ## Bugs
 
