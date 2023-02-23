@@ -345,8 +345,17 @@ def print_ascii(ascii_array):
         print(row)
 
 
-def ncurses_ascii():
-    import curses
+def ncurses_ascii(ascii_array):
+    from curses import wrapper, use_default_colors
+    def inner(stdscr):
+        use_default_colors()
+        stdscr.clear()
+        for row in ascii_array:
+            stdscr.addstr(row + "\n")
+        stdscr.refresh()
+        return stdscr.getkey()
+    wrapper(inner)
+
 
 
 def main(args=""):
