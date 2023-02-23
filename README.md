@@ -24,7 +24,3 @@ clock
 | **-p** | Print the time to stdout. This is the default                  |
 | **-x** | Add a custom time. `./clock.py -x 12 00` |
 
-## Bugs
-
-- Not finished.
-- Ncurses not implemented yet.
