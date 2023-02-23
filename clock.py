@@ -358,10 +358,10 @@ def ncurses_ascii(ascii_array):
 
 
 
-def main(args=""):
+def main(args="", xtime=(0, 0)):
     from datetime import datetime
 
-    time = [int(i) for i in datetime.now().strftime("%H %M").split()]
+    time = xtime if "x" in args else [int(i) for i in datetime.now().strftime("%H %M").split()]
     clock = digital_watch if "d" in args else analog_clock
     display = ncurses_ascii if "n" in args else print_ascii
     display(clock(*time))
@@ -369,7 +369,9 @@ def main(args=""):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv) > 1 and sys.argv[1].startswith("-"):
+    if len(sys.argv) > 3 and sys.argv[1].startswith("-"):
+        main(sys.argv[1][1:], (int(sys.argv[2]), int(sys.argv[3])))
+    elif len(sys.argv) > 1 and sys.argv[1].startswith("-"):
         main(sys.argv[1][1:])
     else:
         main()
