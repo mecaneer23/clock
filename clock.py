@@ -5,6 +5,8 @@ def analog_clock(hours, minutes):
     guard_inputs(hours, minutes)
     hours = to_twelve_hours(hours)
     minutes = int(round_to_nearest_minutes(minutes)) // 5
+    if minutes > 9:
+        hours += 1
     time = [combine_strings(h, m) for h, m in zip(time_to_analog(hours, 1), time_to_analog(minutes, 0))]
     return [
          r"        _____        ",
@@ -322,9 +324,7 @@ def time_to_digital(time):
 
 
 def guard_inputs(hours, minutes):
-    if 0 < hours <= 24 and 0 <= minutes < 59:
-        return
-    raise ValueError("Invalid time")
+    assert 0 < hours <= 24 and 0 <= minutes <= 59, "Invalid time"
 
 
 def to_twelve_hours(hours):
