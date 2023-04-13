@@ -22,4 +22,5 @@ clock
 | **-d** | Digital watch clock face. This is easier to read but less cool |
 | **-n** | Use Ncurses to display the time instead of printing.           |
 | **-p** | Print the time to stdout. This is the default                  |
-| **-x** | Add a custom time. `./clock.py -x 12 00` |
+| **-x** | Add a custom time. `./clock.py -x 12 00`                       |
+
