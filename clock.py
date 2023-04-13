@@ -384,7 +384,7 @@ def main(args="", xtime=(0, 0)):
     if "h" in args:
         import os
 
-        print("\n".join(md_table_to_lines(f"{os.path.dirname(__file__)}/README.md", 19, 27))
+        print("\n".join(md_table_to_lines(f"{os.path.dirname(__file__)}/README.md", 19, 27)))
         return
 
     from datetime import datetime
