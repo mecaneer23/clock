@@ -18,6 +18,7 @@ clock
 
 | Flag   | Description                                                    |
 | ------ | -------------------------------------------------------------- |
+| **-h** | Display a list of options (help)                               |
 | **-a** | Analog clock, this is the default.                             |
 | **-d** | Digital watch clock face. This is easier to read but less cool |
 | **-n** | Use Ncurses to display the time instead of printing.           |
