@@ -241,14 +241,16 @@ def maxlen(iterable):
     return len(max(iterable, key=len))
 
 
-def md_table_to_lines(filename, first_line_idx, last_line_idx):
+def md_table_to_lines(filename, first_line_idx, last_line_idx, remove=[]):
     with open(filename) as f:
         lines = f.readlines()[first_line_idx - 1 : last_line_idx - 1]
     for i, _ in enumerate(lines):
-        lines[i] = lines[i].replace("<kbd>", "").replace("</kbd>", "").replace("**", "").split("|")[1:-1]
+        for item in remove:
+            lines[i] = lines[i].replace(item, "")
+        lines[i] = lines[i].split("|")[1:-1]
     lines[1] = ("-", "-")
-    key_max = maxlen([k.strip() for k, _ in lines])
-    value_max = maxlen(v.strip() for _, v in lines)
+    key_max = len(max([k.strip() for k, _ in lines], key=len))
+    value_max = len(max([v.strip() for _, v in lines], key=len))
     lines[1] = ("-" * (key_max + 2), "-" * value_max)
     for i, (k, v) in enumerate(lines):
         lines[i] = (k.strip() + " " * (key_max - len(k.strip()) + 2) + v.strip()).ljust(
@@ -384,7 +386,7 @@ def main(args="", xtime=(0, 0)):
     if "h" in args:
         import os
 
-        print("\n".join(md_table_to_lines(f"{os.path.dirname(__file__)}/README.md", 19, 27)))
+        print("\n".join(md_table_to_lines(f"{os.path.dirname(__file__)}/README.md", 19, 27, ["**"])))
         return
 
     from datetime import datetime
@@ -394,6 +396,9 @@ def main(args="", xtime=(0, 0)):
         if "x" in args
         else [int(i) for i in datetime.now().strftime("%H %M").split()]
     )
+    if "t" in args:
+        print(to_twelve_hours(time[0]), time[1], sep=":")
+        return
     clock = digital_watch if "d" in args else analog_clock
     display = ncurses_ascii if "n" in args else print_ascii
     display(clock(*time))
