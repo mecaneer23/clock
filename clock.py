@@ -434,7 +434,7 @@ def main(args="", xtime=(0, 0)):
     if "h" in args:
         import os
 
-        print("\n".join(md_table_to_lines(f"{os.path.dirname(__file__)}/README.md", 19, 27, ["**"])))
+        print("\n".join(md_table_to_lines(19, 28, f"{os.path.dirname(__file__)}/README.md", ["**"])))
         return
 
     from datetime import datetime
@@ -445,7 +445,7 @@ def main(args="", xtime=(0, 0)):
         else [int(i) for i in datetime.now().strftime("%H %M").split()]
     )
     if "t" in args:
-        print(to_twelve_hours(time[0]), time[1], sep=":")
+        print(to_twelve_hours(time[0]), str(time[1]).ljust(2, "0"), sep=":")
         return
     clock = digital_watch if "d" in args else analog_clock
     display = ncurses_ascii if "n" in args else print_ascii
