@@ -3,7 +3,7 @@
 from typing import List
 
 
-def analog_clock(hours, minutes):
+def analog_clock(hours: int, minutes: int) -> list[str]:
     guard_inputs(hours, minutes)
     hours = to_twelve_hours(hours)
     minutes = int(round_to_nearest_minutes(minutes)) // 5
@@ -31,7 +31,7 @@ def analog_clock(hours, minutes):
     ]
 
 
-def time_to_analog(time, short=0):
+def time_to_analog(time: int, short: int = 0):
     """short is a boolean value (0 or 1)"""
     return [
         [
@@ -229,7 +229,7 @@ def time_to_analog(time, short=0):
     ][0 if time == 12 else time][short]
 
 
-def combine_strings(a, b):
+def combine_strings(a: str, b: str) -> str:
     output = ""
     for x, y in zip(a, b):
         if x == y:
@@ -237,10 +237,6 @@ def combine_strings(a, b):
         else:
             output += chr(max(ord(x), ord(y)))
     return output
-
-
-def maxlen(iterable):
-    return len(max(iterable, key=len))
 
 
 def md_table_to_lines(
@@ -307,14 +303,14 @@ def md_table_to_lines(
     return lines
 
 
-def digital_watch(hours, minutes):
+def digital_watch(hours: int, minutes: int) -> list[str]:
     guard_inputs(hours, minutes)
-    minutes = str(minutes).rjust(2, "0")
+    minutes_tens, minutes_ones = str(minutes).rjust(2, "0")
     hours = to_twelve_hours(hours)
     a = time_to_digital(1)[1:] if len(str(hours)) == 2 else ["   ", "   "]
     b = time_to_digital(int(str(hours)[-1]))
-    c = time_to_digital(int(minutes[0]))
-    d = time_to_digital(int(minutes[1]))
+    c = time_to_digital(int(minutes_tens))
+    d = time_to_digital(int(minutes_ones))
     return [
         r"       .--.-----.--.         ",
         r"       |--|-----|--|         ",
@@ -341,7 +337,7 @@ def digital_watch(hours, minutes):
     ]
 
 
-def time_to_digital(time):
+def time_to_digital(time: int) -> list[str]:
     return [
         [
             " _ ",
@@ -396,27 +392,27 @@ def time_to_digital(time):
     ][time]
 
 
-def guard_inputs(hours, minutes):
+def guard_inputs(hours: int, minutes: int) -> None:
     assert 0 < hours <= 24 and 0 <= minutes <= 59, "Invalid time"
 
 
-def to_twelve_hours(hours):
+def to_twelve_hours(hours: int) -> int:
     return (hours - 12) if hours > 12 else hours
 
 
-def round_to_nearest_minutes(minutes):
+def round_to_nearest_minutes(minutes: int) -> str:
     remainder = minutes % 5
     return str(minutes + 5 - remainder if remainder > 2 else minutes - remainder).rjust(
         2, "0"
     )
 
 
-def print_ascii(ascii_array):
+def print_ascii(ascii_array: list[str]) -> None:
     for row in ascii_array:
         print(row)
 
 
-def ncurses_ascii(ascii_array):
+def ncurses_ascii(ascii_array: list[str]) -> None:
     from curses import wrapper, use_default_colors
 
     def inner(stdscr):
@@ -430,11 +426,17 @@ def ncurses_ascii(ascii_array):
     wrapper(inner)
 
 
-def main(args="", xtime=(0, 0)):
+def main(args: str = "", xtime: tuple[int, int] = (0, 0)) -> None:
     if "h" in args:
         import os
 
-        print("\n".join(md_table_to_lines(19, 28, f"{os.path.dirname(__file__)}/README.md", ["**"])))
+        print(
+            "\n".join(
+                md_table_to_lines(
+                    19, 28, f"{os.path.dirname(__file__)}/README.md", ["**"]
+                )
+            )
+        )
         return
 
     from datetime import datetime
