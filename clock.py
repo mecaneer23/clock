@@ -10,15 +10,7 @@ from md_to_py import md_table_to_lines
 
 
 def analog_clock(hours: int, minutes: int) -> list[str]:
-    guard_inputs(hours, minutes)
-    hours = to_twelve_hours(hours)
-    minutes = int(round_to_nearest_minutes(minutes)) // 5
-    if minutes > 9:
-        hours += 1
-    time = [
-        combine_strings(h, m)
-        for h, m in zip(time_to_analog(hours, 1), time_to_analog(minutes, 0))
-    ]
+    time = _get_analog_time(hours, minutes)
     return [
         r"        _____        ",
         r"     _.'_____'._     ",
@@ -34,6 +26,33 @@ def analog_clock(hours: int, minutes: int) -> list[str]:
         r"    ((-._____.-))    ",
         r"    _))       ((_    ",
         r"   '--'       '--'   ",
+    ]
+
+
+def circular_analog(hours: int, minutes: int) -> list[str]:
+    time = _get_analog_time(hours, minutes)
+    return [
+        "         , - ~ - ,         ",
+        "     , '    12     ' ,     ",
+        "   ,    11       1     ,   ",
+        f"  , 10   {time[0]}   2  ,  ",
+        f" ,       {time[1]}       , ",
+        f" ,  9    {time[2]}    3  , ",
+        f" ,       {time[3]}       , ",
+        f"  ,  8   {time[4]}   4  ,  ",
+        "   ,   7          5    ,   ",
+        "     ,       6     , '     ",
+        "       ' - ,___ , '        ",
+    ]
+
+
+def _get_analog_time(hours: int, minutes: int) -> list[str]:
+    guard_inputs(hours, minutes)
+    hours = to_twelve_hours(hours)
+    minutes = int(round_to_nearest_minutes(minutes)) // 5
+    return [
+        combine_strings(h, m)
+        for h, m in zip(time_to_analog(hours, 1), time_to_analog(minutes, 0))
     ]
 
 
@@ -380,15 +399,15 @@ def main(args: str = "", xtime: tuple[int, int] = (0, 0)) -> None:
         )
         return
 
-    time = (
-        xtime
-        if "x" in args
-        else [int(i) for i in datetime.now().strftime("%H %M").split()]
-    )
+    if "x" in args:
+        time = xtime
+        args = args.replace("x", "")
+    else:
+        time = [int(i) for i in datetime.now().strftime("%H %M").split()]
     if "t" in args:
         print(to_twelve_hours(time[0]), str(time[1]).ljust(2, "0"), sep=":")
         return
-    clock = digital_watch if "d" in args else analog_clock
+    clock = {"d": digital_watch, "c": circular_analog}.get(args, analog_clock)
     display = ncurses_ascii if "n" in args else print_ascii
     display(clock(*time))
 
