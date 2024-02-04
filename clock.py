@@ -335,7 +335,8 @@ def time_to_digital(time: int) -> list[str]:
 
 
 def guard_inputs(hours: int, minutes: int) -> None:
-    assert 0 < hours <= 24 and 0 <= minutes <= 59, "Invalid time"
+    if not (0 < hours <= 24 and 0 <= minutes <= 59):
+        raise ValueError("Invalid time")
 
 
 def to_twelve_hours(hours: int) -> int:
