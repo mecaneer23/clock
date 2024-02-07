@@ -1,18 +1,6 @@
 # Clock
 
-A command line program to display the time in multiple formats.
-
-## Name
-
-clock
-
-## Synopsis
-
-**clock** \[ **-adnpx** \]
-
-## Description
-
-**clock** is a command line program to display the time in multiple formats. Some options include digital and analog, as well as an ncurses or purely printed display. Clock is written in Python.
+A command line program to display the time in multiple formats. Some options include digital and analog, as well as an ncurses or purely printed display. Clock is written in Python.
 
 ## Options
 
