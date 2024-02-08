@@ -32,17 +32,17 @@ def analog_clock(hours: int, minutes: int) -> list[str]:
 def circular_analog(hours: int, minutes: int) -> list[str]:
     time = _get_analog_time(hours, minutes)
     return [
-        "         , - ~ - ,         ",
-        "     , '    12     ' ,     ",
-        "   ,    11       1     ,   ",
-        f"  , 10   {time[0]}   2  ,  ",
+        r"         , - ~ - ,         ",
+        r"     , '     12    ' ,     ",
+        r"   ,     11      1     ,   ",
+        f"  ,   10 {time[0]} 2    ,  ",
         f" ,       {time[1]}       , ",
         f" ,  9    {time[2]}    3  , ",
         f" ,       {time[3]}       , ",
-        f"  ,  8   {time[4]}   4  ,  ",
-        "   ,   7          5    ,   ",
-        "     ,       6     , '     ",
-        "       ' - ,___ , '        ",
+        f"  ,    8 {time[4]} 4    ,  ",
+        r"   ,     7       5     ,   ",
+        r"     ,       6     , '     ",
+        r"       ' - ,___ , '        ",
     ]
 
 
