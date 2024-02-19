@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """A command line program to display the time in multiple formats."""
-# pylint: disable=missing-docstring
+# pylint: disable=missing-function-docstring
 
 import os
 import sys
