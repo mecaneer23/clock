@@ -375,9 +375,9 @@ def print_ascii(ascii_array: list[str]) -> None:
 
 
 def ncurses_ascii(ascii_array: list[str]) -> None:
-    from curses import use_default_colors, wrapper
+    from curses import use_default_colors, window, wrapper
 
-    def inner(stdscr):
+    def inner(stdscr: window):
         use_default_colors()
         stdscr.clear()
         for row in ascii_array:
