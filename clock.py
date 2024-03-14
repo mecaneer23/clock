@@ -407,7 +407,7 @@ def print_ascii(ascii_array: list[str]) -> None:
 
 def ncurses_ascii(ascii_array: list[str]) -> None:
     """Output an ASCII array line by line using ncurses"""
-    from curses import use_default_colors, window, wrapper
+    from curses import use_default_colors, window, wrapper  # pylint: disable=import-outside-toplevel
 
     def _inner(stdscr: window):
         use_default_colors()
