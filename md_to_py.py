@@ -1,87 +1,240 @@
 """
-Methods to convert a MarkDown table to a formatted python list.
+Convert a MarkDown table to a formatted Python list.
 """
 
-from typing import Any
+from itertools import repeat
+from typing import Callable, Iterable, Iterator, TypeVar
+
+T = TypeVar("T")
+S = TypeVar("S")
 
 
-def _to_lines_split(
-    lines: list[str], remove: tuple[str, ...]
-) -> tuple[int, list[list[str]]]:
-    split: list[list[str]] = [[]] * len(lines)
-    for i, _ in enumerate(lines):
-        for item in remove:
-            lines[i] = lines[i].replace(item, "")
-        split[i] = lines[i].split("|")[1:-1]
-    column_count = len(split[0])
-    split[1] = ["-" for _ in range(column_count)]
-    return column_count, split
+def _get_column_widths(
+    row: str, delimiter: str = "|", strip_spaces: bool = True
+) -> list[int]:
+    """
+    Return a list of column widths. Columns are determined by a delimiter
+    character.
+
+    `strip_spaces` provides a toggle between counting all characters
+    in each column, versus counting characters excluding leading and
+    trailing spaces
+
+    The length of the returned list should be equal to row.count(delimiter) - 1
+    """
+
+    if len(delimiter) != 1:
+        raise ValueError(
+            f"`delimiter` must be one character, is {len(delimiter)} characters"
+        )
+    if delimiter == " ":
+        raise ValueError("`delimiter` cannot be a space")
+
+    count = 0
+    backward_count = 1
+    column = -1
+    output: list[int] = []
+    starts_with_space = strip_spaces
+
+    while count < len(row):
+        if row[count] != " ":
+            starts_with_space = False
+        if row[count] == delimiter:
+            if strip_spaces:
+                while row[count - backward_count] == " ":
+                    backward_count += 1
+                    output[column] -= 1
+                backward_count = 1
+            column += 1
+            output.append(-1)
+            if strip_spaces:
+                output[column] += 1
+                starts_with_space = True
+        if column > -1 and not starts_with_space:
+            output[column] += 1
+        count += 1
+
+    return output[:-1]
 
 
-def _to_lines_join(split_lines: list[list[str]], columns: list[list[int]]) -> list[str]:
-    joined_lines: list[str] = [""] * len(split_lines)
-    for i, line in enumerate(split_lines):
-        for j, char in enumerate(line):
-            line[j] = char.strip().ljust(columns[j][0] + 2)
-        joined_lines[i] = "".join(split_lines[i])
-    joined_lines[1] = "-" * (sum(list(zip(*columns))[0]) + 2 * (len(columns) - 1))
-    return joined_lines
+def _pad_columns(row: str, widths: tuple[int, ...] | int, delimiter: str = "|") -> str:
+    """
+    Pad each column (determined by `delimiter`), to a given width.
+
+    `widths` can be a single int, which will be used for every column,
+    or can be a tuple with length row.count(delimiter) - 1, with each
+    index corresponding to a different column.
+
+    Returns padded version of `row`.
+    """
+
+    if len(delimiter) != 1:
+        raise ValueError(
+            f"`delimiter` must be one character, is {len(delimiter)} characters"
+        )
+    if delimiter == " ":
+        raise ValueError("`delimiter` cannot be a space")
+
+    column_count = row.count(delimiter) - 1
+
+    if isinstance(widths, tuple) and len(widths) != column_count:
+        raise ValueError(
+            "`widths` cannot be a tuple of arbitrary length. "
+            f"Is {len(widths)}, should be {column_count}."
+        )
+
+    if isinstance(widths, int):
+        widths = tuple(repeat(widths, column_count))
+
+    column = 0
+    backward_count = 1
+    trailing_space_start = 0
+    prev_delimiter_index = 0
+    change_amount = 0
+    new_row = ""
+
+    for delim_loc, char in enumerate(row):
+        if char != delimiter or delim_loc == 0:
+            continue
+        while row[delim_loc - backward_count] == " ":
+            backward_count += 1
+        trailing_space_start = delim_loc - backward_count + 1
+        non_space_len = trailing_space_start - prev_delimiter_index
+        if widths[column] < non_space_len:
+            raise ValueError(
+                f"Width of column `{column}` cannot be less than "
+                f"{non_space_len}, is {widths[column]}"
+            )
+        change_amount = widths[column] - non_space_len
+        for index in range(
+            prev_delimiter_index, prev_delimiter_index + non_space_len + 1
+        ):
+            new_row += row[index]
+        new_row += " " * change_amount
+        prev_delimiter_index = delim_loc
+        backward_count = 1
+        column += 1
+
+    new_row += delimiter
+    return new_row
+
+
+def _exclusive_map(
+    func: Callable[[T], S],
+    *sequences: Iterable[T],
+    exclude: frozenset[int] = frozenset(),
+) -> Iterator[S]:
+    """
+    Similar to the built-in `map` function, but allows for
+    exclusion of certain elements of `seq`.
+
+    `exclude` should be a set of indices to exclude.
+    """
+
+    for i, arguments in enumerate(zip(*sequences)):
+        if i not in exclude:
+            yield func(*arguments)
 
 
 def md_table_to_lines(
     first_line_idx: int,
     last_line_idx: int,
     filename: str = "README.md",
-    remove: tuple[str, ...] = (),
+    remove: frozenset[str] = frozenset(),
 ) -> list[str]:
     """
-    Converts a Markdown table to a list of formatted strings.
+    Convert a Markdown table to a list of formatted strings.
 
-    Args:
-        first_line_idx (int): The index of the first line of the Markdown
-        table to be converted.
-        last_line_idx (int): The index of the last line of the Markdown
-        table to be converted.
-        filename (str, optional): The name of the markdown file containing the
-        table. Default is "README.md".
-        remove (list[str], optional): The list of strings to be removed from each line.
-        This is in the case of formatting that should exist in markdown but not
-        python. Default is an empty list.
+    Arguments
+    ---------
 
-    Returns:
-        list[str]: A list of formatted strings representing the converted
-        Markdown table.
+    - `first_line_idx` (int): The index of the first line of the markdown
+    table to be converted.
+    - `last_line_idx` (int): The index of the last line of the markdown
+    table to be converted.
+    - `filename` (str, optional): The name of the file
+    containing the table. Default is "README.md".
+    - `remove` (frozenset[str], optional): The set of strings to be
+    removed from each line. Default is an empty set.
 
-    Raises:
-        ValueError: If the last line index is less than or equal to the
-        first line index.
-        FileNotFoundError: If the specified markdown file cannot be found.
+    Returns
+    -------
+
+    -  `list[str]`: A list of formatted strings representing the converted
+    Markdown table.
+
     """
 
-    # Check for valid line indices
+    _ = """
+    ## Examples
+
+    | Item      | Quantity | Price |
+    | --------- | -------- | ----- |
+    | Apple     | 5        | $1.00 |
+    | Banana    | 3        | $1.50 |
+    | Orange    | 2        | $0.75 |
+    | Pineapple | 1        | $3.50 |
+
+    ```python
+    >>> print("\n".join(md_table_to_lines(23, 29)))
+    Item       Quantity  Price
+    --------------------------
+    Apple      5         $1.00
+    Banana     3         $1.50
+    Orange     2         $0.75
+    Pineapple  1         $3.50
+
+    ```
+
+    | Flag            | Description                     |
+    | --------------- | ------------------------------- |
+    | **-h**          | Display help message            |
+    | **-v**          | Enable verbose output           |
+    | **-f** FILENAME | Specify input file              |
+    | **-o** FILENAME | Specify output file             |
+    | **-n**          | Do not overwrite existing files |
+
+    ```python
+    >>> print("\n".join(md_table_to_lines(41, 48, remove=("**",))))
+    Flag         Description
+    --------------------------------------------
+    -h           Display help message
+    -v           Enable verbose output
+    -f FILENAME  Specify input file
+    -o FILENAME  Specify output file
+    -n           Do not overwrite existing files
+
+    ```
+    """
+
     if last_line_idx <= first_line_idx:
         raise ValueError("Last line index must be greater than first line index.")
 
-    # Get raw lines from the markdown file
     try:
         with open(filename, encoding="utf-8") as markdown_file:
-            lines = markdown_file.readlines()[first_line_idx - 1 : last_line_idx - 1]
+            lines = markdown_file.read().splitlines()[
+                first_line_idx - 1 : last_line_idx - 1
+            ]
     except FileNotFoundError as err:
-        raise FileNotFoundError("Markdown file not found.") from err
+        raise FileNotFoundError("File not found.") from err
 
-    # Remove unwanted characters and split each line into a list of values
-    column_count, split_lines = _to_lines_split(lines, remove)
+    for i, _ in enumerate(lines):
+        for item in remove:
+            lines[i] = lines[i].replace(item, "")
 
-    # Create lists of columns
-    columns: list[list[Any]] = [[0, []] for _ in range(column_count)]
-    for i in range(column_count):
-        for line in split_lines:
-            columns[i][1].append(line[i])
+    max_column_lengths: tuple[int, ...] = tuple(
+        map(
+            lambda iterable: max(iterable) + 2,
+            zip(*_exclusive_map(_get_column_widths, lines, exclude=frozenset({1}))),
+        )
+    )
 
-    # Find the maximum length of each column
-    for i, (_, column) in enumerate(columns):
-        columns[i][0] = len(max(map(str.strip, column), key=len))
-    split_lines[1] = ["-" * (length + 1) for length, _ in columns]
+    for i, _ in enumerate(lines):
+        if i == 1:
+            lines[1] = "-" * (sum(max_column_lengths) - 2)
+            continue
+        lines[i] = _pad_columns(lines[i], max_column_lengths)
+        for old, new in {" | ": "  ", "| ": "", " |": ""}.items():
+            lines[i] = lines[i].replace(old, new)
 
-    # Join the lines together into a list of formatted strings
-    return _to_lines_join(split_lines, columns)
+    return lines

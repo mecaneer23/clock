@@ -426,7 +426,12 @@ def main(args: str = "", xtime: tuple[int, int] = (0, 0)) -> None:
         print(
             "\n".join(
                 md_table_to_lines(
-                    19, 29, f"{os.path.dirname(__file__)}/README.md", ("**",)
+                    7,
+                    17,
+                    f"{os.path.dirname(__file__)}/README.md",
+                    frozenset(
+                        "**",
+                    ),
                 )
             )
         )
