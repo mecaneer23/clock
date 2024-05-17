@@ -4,6 +4,7 @@
 import os
 import sys
 from datetime import datetime
+from typing import cast
 
 from md_to_py import md_table_to_lines
 
@@ -285,12 +286,12 @@ def digital_watch(hours: int, minutes: int) -> list[str]:
     clock with the passed in time
     """
     guard_inputs(hours, minutes)
-    minutes_tens, minutes_ones = str(minutes).rjust(2, "0")
+    str_minutes = str(minutes).zfill(2)
     hours = to_twelve_hours(hours)
     a = time_to_digital(1)[1:] if len(str(hours)) == 2 else ["   ", "   "]
     b = time_to_digital(int(str(hours)[-1]))
-    c = time_to_digital(int(minutes_tens))
-    d = time_to_digital(int(minutes_ones))
+    c = time_to_digital(int(str_minutes[0]))
+    d = time_to_digital(int(str_minutes[1]))
     return [
         r"       .--.-----.--.         ",
         r"       |--|-----|--|         ",
@@ -441,7 +442,7 @@ def main(args: str = "", xtime: tuple[int, int] = (0, 0)) -> None:
         time = xtime
         args = args.replace("x", "")
     else:
-        time = [int(i) for i in datetime.now().strftime("%H %M").split()]
+        time = cast(tuple[int, int], tuple(map(int, datetime.now().strftime("%H %M").split())))
     if "t" in args:
         print(to_twelve_hours(time[0]), str(time[1]).ljust(2, "0"), sep=":")
         return
