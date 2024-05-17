@@ -446,8 +446,12 @@ def main(args: str = "", xtime: tuple[int, int] = (0, 0)) -> None:
     if "t" in args:
         print(to_twelve_hours(time[0]), str(time[1]).ljust(2, "0"), sep=":")
         return
+    if "n" in args:
+        display = ncurses_ascii
+        args = args.replace("n", "")
+    else:
+        display = print_ascii
     clock = {"d": digital_watch, "c": circular_analog}.get(args, analog_clock)
-    display = ncurses_ascii if "n" in args else print_ascii
     display(clock(*time))
 
 
