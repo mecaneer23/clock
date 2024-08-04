@@ -1,0 +1,59 @@
+.container {
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.face {
+    position: relative;
+}
+
+.face div {
+    position: absolute;
+    top: 10vh;
+}
+
+.face :nth-child(2) {
+    transform: rotate(30deg);
+}
+
+.face :nth-child(3) {
+    transform: rotate(60deg);
+}
+
+.face :nth-child(4) {
+    transform: rotate(90deg);
+}
+
+.face :nth-child(5) {
+    transform: rotate(120deg);
+}
+
+.face :nth-child(6) {
+    transform: rotate(150deg);
+}
+
+.face :nth-child(7) {
+    transform: rotate(180deg);
+}
+
+.face :nth-child(8) {
+    transform: rotate(210deg);
+}
+
+.face :nth-child(9) {
+    transform: rotate(240deg);
+}
+
+.face :nth-child(10) {
+    transform: rotate(270deg);
+}
+
+.face :nth-child(11) {
+    transform: rotate(300deg);
+}
+
+.face :nth-child(12) {
+    transform: rotate(330deg);
+}
