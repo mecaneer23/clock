@@ -9,51 +9,101 @@
     position: relative;
 }
 
-.face div {
+.number {
     position: absolute;
-    top: 10vh;
+    top: 30vh;
+    width: 70vh;
+    left: -35vh;
+}
+
+.fix-rotation {
+    width: min-content;
 }
 
 .face :nth-child(2) {
     transform: rotate(30deg);
 }
 
+.face :nth-child(2) .fix-rotation {
+    transform: rotate(-30deg);
+}
+
 .face :nth-child(3) {
     transform: rotate(60deg);
+}
+
+.face :nth-child(3) .fix-rotation {
+    transform: rotate(-60deg);
 }
 
 .face :nth-child(4) {
     transform: rotate(90deg);
 }
 
+.face :nth-child(4) .fix-rotation {
+    transform: rotate(-90deg);
+}
+
 .face :nth-child(5) {
     transform: rotate(120deg);
+}
+
+.face :nth-child(5) .fix-rotation {
+    transform: rotate(-120deg);
 }
 
 .face :nth-child(6) {
     transform: rotate(150deg);
 }
 
+.face :nth-child(6) .fix-rotation {
+    transform: rotate(-150deg);
+}
+
 .face :nth-child(7) {
     transform: rotate(180deg);
+}
+
+.face :nth-child(7) .fix-rotation {
+    transform: rotate(-180deg);
 }
 
 .face :nth-child(8) {
     transform: rotate(210deg);
 }
 
+.face :nth-child(8) .fix-rotation {
+    transform: rotate(-210deg);
+}
+
 .face :nth-child(9) {
     transform: rotate(240deg);
+}
+
+.face :nth-child(9) .fix-rotation {
+    transform: rotate(-240deg);
 }
 
 .face :nth-child(10) {
     transform: rotate(270deg);
 }
 
+.face :nth-child(10) .fix-rotation {
+    transform: rotate(-270deg);
+}
+
 .face :nth-child(11) {
     transform: rotate(300deg);
 }
 
+.face :nth-child(11) .fix-rotation {
+    transform: rotate(-300deg);
+}
+
 .face :nth-child(12) {
     transform: rotate(330deg);
+}
+
+.face :nth-child(12) .fix-rotation {
+    transform: rotate(-330deg);
 }
