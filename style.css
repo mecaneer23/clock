@@ -7,103 +7,137 @@
 
 .face {
     position: relative;
+    font-size: xx-large;
+}
+
+.outer-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1vh solid black;
+    width: 68vh;
+    height: 68vh;
+    top: -3vh;
+    left: -35vh;
 }
 
 .number {
     position: absolute;
     top: 30vh;
-    width: 70vh;
-    left: -35vh;
+    width: 60vh;
+    left: -30vh;
+}
+
+.dot {
+    position: absolute;
+    width: 64vh;
+    top: 30vh;
+    left: -32vh;
+}
+
+.center-dot {
+    position: absolute;
+    top: 30vh;
 }
 
 .fix-rotation {
     width: min-content;
 }
 
-.face :nth-child(2) {
+.dot:nth-child(1),
+.number:nth-child(2) {
     transform: rotate(30deg);
 }
 
-.face :nth-child(2) .fix-rotation {
+.number:nth-child(2) .fix-rotation {
     transform: rotate(-30deg);
 }
 
-.face :nth-child(3) {
+.dot:nth-child(3),
+.number:nth-child(4) {
     transform: rotate(60deg);
 }
 
-.face :nth-child(3) .fix-rotation {
+.number:nth-child(4) .fix-rotation {
     transform: rotate(-60deg);
 }
 
-.face :nth-child(4) {
+.dot:nth-child(5),
+.number:nth-child(6) {
     transform: rotate(90deg);
 }
 
-.face :nth-child(4) .fix-rotation {
+.number:nth-child(6) .fix-rotation {
     transform: rotate(-90deg);
 }
 
-.face :nth-child(5) {
+.dot:nth-child(7),
+.number:nth-child(8) {
     transform: rotate(120deg);
 }
 
-.face :nth-child(5) .fix-rotation {
+.number:nth-child(8) .fix-rotation {
     transform: rotate(-120deg);
 }
 
-.face :nth-child(6) {
+.dot:nth-child(9),
+.number:nth-child(10) {
     transform: rotate(150deg);
 }
 
-.face :nth-child(6) .fix-rotation {
+.number:nth-child(10) .fix-rotation {
     transform: rotate(-150deg);
 }
 
-.face :nth-child(7) {
+.dot:nth-child(11),
+.number:nth-child(12) {
     transform: rotate(180deg);
 }
 
-.face :nth-child(7) .fix-rotation {
+.number:nth-child(12) .fix-rotation {
     transform: rotate(-180deg);
 }
 
-.face :nth-child(8) {
+.dot:nth-child(13),
+.number:nth-child(14) {
     transform: rotate(210deg);
 }
 
-.face :nth-child(8) .fix-rotation {
+.number:nth-child(14) .fix-rotation {
     transform: rotate(-210deg);
 }
 
-.face :nth-child(9) {
+.dot:nth-child(15),
+.number:nth-child(16) {
     transform: rotate(240deg);
 }
 
-.face :nth-child(9) .fix-rotation {
+.number:nth-child(16) .fix-rotation {
     transform: rotate(-240deg);
 }
 
-.face :nth-child(10) {
+.dot:nth-child(17),
+.number:nth-child(18) {
     transform: rotate(270deg);
 }
 
-.face :nth-child(10) .fix-rotation {
+.number:nth-child(18) .fix-rotation {
     transform: rotate(-270deg);
 }
 
-.face :nth-child(11) {
+.dot:nth-child(19),
+.number:nth-child(20) {
     transform: rotate(300deg);
 }
 
-.face :nth-child(11) .fix-rotation {
+.number:nth-child(20) .fix-rotation {
     transform: rotate(-300deg);
 }
 
-.face :nth-child(12) {
+.dot:nth-child(21),
+.number:nth-child(22) {
     transform: rotate(330deg);
 }
 
-.face :nth-child(12) .fix-rotation {
+.number:nth-child(22) .fix-rotation {
     transform: rotate(-330deg);
 }
