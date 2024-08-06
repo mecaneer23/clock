@@ -10,8 +10,12 @@
     font-size: xx-large;
 }
 
-.outer-ring {
+.face > * {
     position: absolute;
+    top: 30vh;
+}
+
+.outer-ring {
     border-radius: 50%;
     border: 1vh solid black;
     width: 68vh;
@@ -21,20 +25,33 @@
 }
 
 .number {
-    position: absolute;
-    top: 30vh;
     width: 60vh;
     left: -30vh;
 }
 
 .dot {
-    position: absolute;
     width: 64vh;
-    top: 30vh;
     left: -32vh;
 }
 
+.line {
+    width: 66vh;
+    left: -33vh;
+}
+
 .center-dot {
-    position: absolute;
-    top: 30vh;
+    background-color: gray;
+    border-radius: 50%;
+    width: 5vh;
+    height: 5vh;
+    left: -2vh;
+    top: 29vh;
+}
+
+.second-hand {
+    border-radius: 5vh;
+    width: 24vh;
+    height: 1vh;
+    top: 31vh;
+    background-color: black;
 }

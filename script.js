@@ -1,14 +1,9 @@
-// setInterval(function () {
-//     document.title = new Date().toTimeString();
-// }, 1000);
-
 const face = document.querySelector(".face");
 
-function createRotationElement(position, content, className) {
+function createRotationElement(degrees, content, className, rotate) {
     const div = document.createElement("div");
     const fixedRotation = document.createElement("div");
-    const degrees = position * 30 % 360;
-    fixedRotation.style.transform = `rotate(${-degrees}deg)`;
+    fixedRotation.style.transform = `rotate(${rotate ? -degrees : 90}deg)`;
     fixedRotation.style.width = "min-content";
     fixedRotation.innerHTML = content;
     div.appendChild(fixedRotation);
@@ -17,15 +12,23 @@ function createRotationElement(position, content, className) {
     face.appendChild(div);
 }
 
-function createNumbersAndDots() {
+function createFace() {
     for (let num = 1; num < 13; num++) {
-        createRotationElement(num + 3, num, "number");
-        createRotationElement(num, "&#x2022;", "dot");
+        createRotationElement((num + 3) * 30 % 360, num, "number", true);
+        createRotationElement(num * 30 % 360, "", "dot", true);
+    }
+    for (let num = 0; num < 60; num++) {
+        if (num % 5 != 0) {
+            createRotationElement(num * 6 % 360, "&#124;", "line", false);
+        }
     }
 }
 
-function createFace() {
-    createNumbersAndDots();
+function animateHands() {
+    setInterval(function () {
+        document.title = new Date().toTimeString();
+        
+    }, 1000);
 }
 
 createFace();
