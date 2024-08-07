@@ -4,7 +4,6 @@ function createRotationElement(degrees, content, className, rotate) {
     const div = document.createElement("div");
     const fixedRotation = document.createElement("div");
     fixedRotation.style.transform = `rotate(${rotate ? -degrees : 90}deg)`;
-    fixedRotation.style.width = "min-content";
     fixedRotation.innerHTML = content;
     div.appendChild(fixedRotation);
     div.classList.add(className);
@@ -19,7 +18,7 @@ function createFace() {
     }
     for (let num = 0; num < 60; num++) {
         if (num % 5 != 0) {
-            createRotationElement(num * 6 % 360, "|", "line", false);
+            createRotationElement(num * 6 % 360, "", "line", false);
         }
     }
 }

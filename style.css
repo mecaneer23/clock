@@ -25,6 +25,10 @@
     left: 4vh;
 }
 
+.number div {
+    width: min-content;
+}
+
 .dot {
     width: 66vh;
     top: 33vh;
@@ -39,9 +43,15 @@
 }
 
 .line {
-    width: 66vh;
-    top: 32vh;
-    left: 1vh;
+    width: 64vh;
+    top: 33vh;
+    left: 2vh;
+}
+
+.line div {
+    width: 0.2vh;
+    height: 2vh;
+    background-color: black;
 }
 
 .center-dot {
