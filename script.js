@@ -24,10 +24,21 @@ function createFace() {
 }
 
 function animateHands() {
+    const hourHand = document.querySelector(".hour");
+    const minuteHand = document.querySelector(".minute");
+    const secondHand = document.querySelector(".second");
     setInterval(function () {
-        document.title = new Date().toTimeString();
-        
+        const date = new Date();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
+        document.title = date.toTimeString();
+
+        // hourHand.style.transform = `rotate(${hours}deg)`;
+        // minuteHand.style.transform = `rotate(${minutes}deg)`;
+        // secondHand.style.transform = `rotate(${seconds}deg)`;
     }, 1000);
 }
 
 createFace();
+animateHands();

@@ -1,3 +1,7 @@
+:root {
+    --accent: #4fa874;
+}
+
 .container {
     margin-top: 17vh;
     height: 0;
@@ -36,7 +40,7 @@
 }
 
 .dot div {
-    background-color: #4fa874;
+    background-color: var(--accent);
     width: 2vh !important;
     height: 2vh;
     border-radius: 50%;
@@ -61,16 +65,36 @@
     height: 5vh;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-40%, -50%);
     z-index: 5;
 }
 
-.second-hand {
+.hand {
     border-radius: 5vh;
-    width: 24vh;
-    height: 1vh;
     top: 50%;
-    background-color: black;
     left: 50%;
     transform: translateY(-50%);
+    border: 0.1vh solid black;
+    transform-origin: center left;
+}
+
+.second {
+    width: 30vh;
+    height: 0.5vh;
+    background-color: yellow;
+    z-index: 4;
+}
+
+.minute {
+    width: 26vh;
+    height: 1vh;
+    background-color: var(--accent);
+    z-index: 3;
+}
+
+.hour {
+    width: 22vh;
+    height: 2vh;
+    background-color: var(--accent);
+    z-index: 2;
 }
