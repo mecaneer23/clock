@@ -23,20 +23,30 @@ function createFace() {
     }
 }
 
+function getTime() {
+    const date = new Date();
+    return {
+        hours: date.getHours(),
+        minutes: date.getMinutes(),
+        seconds: date.getSeconds(),
+        timeString: date.toTimeString(),
+    };
+}
+
 function animateHands() {
     const hourHand = document.querySelector(".hour");
     const minuteHand = document.querySelector(".minute");
     const secondHand = document.querySelector(".second");
     setInterval(function () {
-        const date = new Date();
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const seconds = date.getSeconds();
-        document.title = date.toTimeString();
+        const date = getTime();
+        const hours = date.hours;
+        const minutes = date.minutes;
+        const seconds = date.seconds;
+        document.title = date.timeString;
 
-        // hourHand.style.transform = `rotate(${hours}deg)`;
-        // minuteHand.style.transform = `rotate(${minutes}deg)`;
-        // secondHand.style.transform = `rotate(${seconds}deg)`;
+        hourHand.style.transform = `rotate(${(hours * 30 + minutes / 2) - 90}deg)`;
+        minuteHand.style.transform = `rotate(${(minutes * 6) - 90}deg)`;
+        secondHand.style.transform = `rotate(${(seconds * 6) - 90}deg)`;
     }, 1000);
 }
 

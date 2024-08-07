@@ -71,9 +71,7 @@
 
 .hand {
     border-radius: 5vh;
-    top: 50%;
     left: 50%;
-    transform: translateY(-50%);
     border: 0.1vh solid black;
     transform-origin: center left;
 }
@@ -81,6 +79,7 @@
 .second {
     width: 30vh;
     height: 0.5vh;
+    top: calc(50% - 0.25vh);
     background-color: yellow;
     z-index: 4;
 }
@@ -88,6 +87,7 @@
 .minute {
     width: 26vh;
     height: 1vh;
+    top: calc(50% - 0.5vh);
     background-color: var(--accent);
     z-index: 3;
 }
@@ -95,6 +95,7 @@
 .hour {
     width: 22vh;
     height: 2vh;
+    top: calc(50% - 1vh);
     background-color: var(--accent);
     z-index: 2;
 }
