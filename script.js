@@ -19,7 +19,7 @@ function createFace() {
     }
     for (let num = 0; num < 60; num++) {
         if (num % 5 != 0) {
-            createRotationElement(num * 6 % 360, "&#124;", "line", false);
+            createRotationElement(num * 6 % 360, "|", "line", false);
         }
     }
 }
