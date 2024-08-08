@@ -1,5 +1,5 @@
 :root {
-    --accent: #4fa874;
+    --accent: #6cb68b;
 }
 
 .container {
@@ -19,7 +19,7 @@
     height: 68vh;
 }
 
-.face > div {
+.face>div {
     position: absolute;
 }
 
@@ -27,9 +27,22 @@
     width: 60vh;
     top: 32vh;
     left: 4vh;
+    color: var(--accent);
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000;
 }
 
-.number div {
+.small-number {
+    width: 50vh;
+    top: 33vh;
+    left: 9vh;
+    font-size: large;
+}
+
+.number div,
+.small-number div {
     width: min-content;
 }
 
@@ -80,7 +93,7 @@
     width: 30vh;
     height: 0.5vh;
     top: calc(50% - 0.25vh);
-    background-color: yellow;
+    background-color: black;
     z-index: 4;
 }
 
@@ -93,7 +106,7 @@
 }
 
 .hour {
-    width: 22vh;
+    width: 20vh;
     height: 2vh;
     top: calc(50% - 1vh);
     background-color: var(--accent);

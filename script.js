@@ -14,6 +14,7 @@ function createRotationElement(degrees, content, className, rotate) {
 function createFace() {
     for (let num = 1; num < 13; num++) {
         createRotationElement((num + 3) * 30 % 360, num, "number", true);
+        createRotationElement((num + 3) * 30 % 360, num + 12, "small-number", true);
         createRotationElement(num * 30 % 360, "", "dot", true);
     }
     for (let num = 0; num < 60; num++) {
