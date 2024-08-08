@@ -134,11 +134,29 @@
 }
 
 .second {
-    width: 30vh;
-    height: 0.5vh;
+    border: 0.5vh solid transparent;
+    border-left: 30vh solid black;
+    box-sizing: content-box;
     top: calc(50% - 0.25vh);
-    background-color: black;
     z-index: 4;
+}
+
+.second:after {
+    left: -6vh;
+    border: 0.8vh solid transparent;
+    border-left: 2.5vh solid var(--accent);
+    content: '';
+    position: absolute;
+    transform: translateY(-50%);
+}
+
+.second:before {
+    left: -6.2vh;
+    border: 1vh solid transparent;
+    border-left: 3.4vh solid black;
+    content: '';
+    position: absolute;
+    transform: translateY(-50%);
 }
 
 .minute {
