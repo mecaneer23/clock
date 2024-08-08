@@ -46,7 +46,7 @@ function animateHands() {
         document.title = date.timeString;
 
         hourHand.style.transform = `rotate(${(hours * 30 + minutes / 2) - 90}deg)`;
-        minuteHand.style.transform = `rotate(${(minutes * 6) - 90}deg)`;
+        minuteHand.style.transform = `rotate(${(minutes * 6 + seconds / 12) - 90}deg)`;
         secondHand.style.transform = `rotate(${(seconds * 6) - 90}deg)`;
     }, 1000);
 }
