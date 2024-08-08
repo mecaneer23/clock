@@ -1,4 +1,7 @@
 const face = document.querySelector(".face");
+const hourHand = document.querySelector(".hour");
+const minuteHand = document.querySelector(".minute");
+const secondHand = document.querySelector(".second");
 
 function createRotationElement(degrees, content, className, rotate) {
     const div = document.createElement("div");
@@ -35,21 +38,17 @@ function getTime() {
 }
 
 function animateHands() {
-    const hourHand = document.querySelector(".hour");
-    const minuteHand = document.querySelector(".minute");
-    const secondHand = document.querySelector(".second");
-    setInterval(function () {
-        const date = getTime();
-        const hours = date.hours;
-        const minutes = date.minutes;
-        const seconds = date.seconds;
-        document.title = date.timeString;
+    const date = getTime();
+    const hours = date.hours;
+    const minutes = date.minutes;
+    const seconds = date.seconds;
+    document.title = date.timeString;
 
-        hourHand.style.transform = `rotate(${(hours * 30 + minutes / 2) - 90}deg)`;
-        minuteHand.style.transform = `rotate(${(minutes * 6 + seconds / 12) - 90}deg)`;
-        secondHand.style.transform = `rotate(${(seconds * 6) - 90}deg)`;
-    }, 1000);
+    hourHand.style.transform = `rotate(${(hours * 30 + minutes / 2) - 90}deg)`;
+    minuteHand.style.transform = `rotate(${(minutes * 6 + seconds / 12) - 90}deg)`;
+    secondHand.style.transform = `rotate(${(seconds * 6) - 90}deg)`;
 }
 
 createFace();
-animateHands();
+animateHands();  // called once here so hands update immediately on pageload
+setInterval(animateHands, 1000);
