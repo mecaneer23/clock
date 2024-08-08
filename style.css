@@ -1,12 +1,13 @@
 :root {
     --accent: #6cb68b;
+    --secondary: black;
 }
 
 .github-corner {
     height: 15vh;
     width: 15vh;
     color: var(--accent);
-    fill: black;
+    fill: var(--secondary);
     position: absolute;
     top: 0;
     border: 0;
@@ -57,7 +58,7 @@
 .face {
     position: relative;
     font-size: xx-large;
-    border: 1vh solid black;
+    border: 1vh solid var(--secondary);
     border-radius: 50%;
     width: 68vh;
     height: 68vh;
@@ -72,10 +73,10 @@
     top: 32vh;
     left: 4vh;
     color: var(--accent);
-    text-shadow: -0.1vh 0.1vh 0 #000,
-        0.1vh 0.1vh 0 #000,
-        0.1vh -0.1vh 0 #000,
-        -0.1vh -0.1vh 0 #000;
+    text-shadow: -0.1vh 0.1vh 0 var(--secondary),
+        0.1vh 0.1vh 0 var(--secondary),
+        0.1vh -0.1vh 0 var(--secondary),
+        -0.1vh -0.1vh 0 var(--secondary);
 }
 
 .small-number {
@@ -112,11 +113,11 @@
 .line div {
     width: 0.2vh;
     height: 2vh;
-    background-color: black;
+    background-color: var(--secondary);
 }
 
 .center-dot {
-    background-color: gray;
+    background-color: var(--secondary);
     border-radius: 50%;
     width: 5vh;
     height: 5vh;
@@ -129,13 +130,13 @@
 .hand {
     border-radius: 5vh;
     left: 50%;
-    border: 0.1vh solid black;
+    border: 0.1vh solid var(--secondary);
     transform-origin: center left;
 }
 
 .second {
     border: 0.5vh solid transparent;
-    border-left: 30vh solid black;
+    border-left: 30vh solid var(--secondary);
     box-sizing: content-box;
     top: calc(50% - 0.25vh);
     z-index: 4;
@@ -153,7 +154,7 @@
 .second:before {
     left: -6.2vh;
     border: 1vh solid transparent;
-    border-left: 3.4vh solid black;
+    border-left: 3.4vh solid var(--secondary);
     content: '';
     position: absolute;
     transform: translateY(-50%);
