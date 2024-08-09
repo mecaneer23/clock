@@ -180,7 +180,7 @@
     transform: translateX(-3vh);
 }
 
-.minute .forward::before {
+.minute .tip::before {
     position: absolute;
     content: '';
     left: 21vh;
@@ -191,7 +191,7 @@
     z-index: 3;
 }
 
-.minute .forward::after {
+.minute .tip::after {
     position: absolute;
     content: '';
     left: 21vh;
