@@ -140,7 +140,7 @@
     z-index: 4;
 }
 
-.second:after {
+.second::after {
     left: -6vh;
     border: 0.8vh solid transparent;
     border-left: 2.5vh solid var(--accent);
@@ -149,7 +149,7 @@
     transform: translateY(-50%);
 }
 
-.second:before {
+.second::before {
     left: -6.2vh;
     border: 1vh solid transparent;
     border-left: 3.4vh solid var(--secondary);
@@ -163,7 +163,7 @@
     z-index: 3;
 }
 
-.minute:before {
+.minute::before {
     position: absolute;
     content: '';
     border: 1vh solid transparent;
@@ -172,7 +172,7 @@
     height: 0.5vh;
 }
 
-.minute:after {
+.minute::after {
     position: absolute;
     content: '';
     border: 1vh solid transparent;
@@ -180,7 +180,7 @@
     transform: translateX(-3vh);
 }
 
-.minute .forward:before {
+.minute .forward::before {
     position: absolute;
     content: '';
     left: 21vh;
@@ -191,7 +191,7 @@
     z-index: 3;
 }
 
-.minute .forward:after {
+.minute .forward::after {
     position: absolute;
     content: '';
     left: 21vh;
