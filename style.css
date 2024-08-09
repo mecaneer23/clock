@@ -159,8 +159,7 @@
 }
 
 .minute {
-    /* total length = 26vh */
-    top: calc(50% - 0.5vh);
+    top: calc(50% - 0.75vh);
     z-index: 3;
 }
 
