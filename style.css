@@ -159,8 +159,9 @@
 }
 
 .minute {
-    top: calc(50% - 0.75vh);
+    top: 50%;
     z-index: 3;
+    transform-origin: center;
 }
 
 .minute::before {
@@ -168,7 +169,8 @@
     content: '';
     border: 1vh solid transparent;
     border-right: 20vh solid var(--secondary);
-    transform: translateY(-0.25vh);
+    top: 50%;
+    transform: translateY(-50%);
     height: 0.5vh;
 }
 
@@ -177,16 +179,18 @@
     content: '';
     border: 1vh solid transparent;
     border-right: 23vh solid var(--accent);
-    transform: translateX(-3vh);
+    top: 50%;
+    transform: translate(-3vh, -50%);
 }
 
 .minute .tip::before {
     position: absolute;
     content: '';
     left: 21vh;
+    top: 50%;
     border: 1vh solid transparent;
     border-left: 3.5vh solid var(--secondary);
-    transform: translateY(-0.25vh);
+    transform: translateY(-50%);
     height: 0.5vh;
     z-index: 3;
 }
@@ -195,17 +199,20 @@
     position: absolute;
     content: '';
     left: 21vh;
+    top: 50%;
     border: 1vh solid transparent;
     border-left: 3.5vh solid var(--accent);
+    transform: translateY(-50%);
     z-index: 4;
 }
 
 .minute .needle {
     position: absolute;
     left: 24vh;
-    top: 0.7vh;
+    top: 50%;
     width: 2.25vh;
     height: 0.5vh;
+    transform: translateY(-50%);
     background-color: var(--secondary);
     z-index: 2;
 }
