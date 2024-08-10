@@ -259,7 +259,7 @@
     left: 15vh;
     top: 50%;
     border: 1.5vh solid transparent;
-    border-left: 2.5vh solid var(--accent);
+    border-left: 2.75vh solid var(--accent);
     transform: translateY(-50%);
     z-index: 4;
 }
