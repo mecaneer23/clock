@@ -188,10 +188,9 @@
     content: '';
     left: 21vh;
     top: 50%;
-    border: 1vh solid transparent;
-    border-left: 3.5vh solid var(--secondary);
+    border: 1.25vh solid transparent;
+    border-left: 4vh solid var(--secondary);
     transform: translateY(-50%);
-    height: 0.5vh;
     z-index: 3;
 }
 
@@ -211,7 +210,7 @@
     left: 24vh;
     top: 50%;
     width: 2.25vh;
-    height: 0.5vh;
+    height: 0.25vh;
     transform: translateY(-50%);
     background-color: var(--secondary);
     z-index: 2;
