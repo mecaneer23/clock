@@ -49,6 +49,19 @@ function animateHands() {
     secondHand.style.transform = `rotate(${(seconds * 6) - 90}deg)`;
 }
 
+function setAccentColor() {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has("color")) {
+        return;
+    }
+    let color = params.get("color");
+    if (/^[0-9A-F]{6}$/i.test(color)) {
+        color = `#${color}`;
+    }
+    document.documentElement.style.setProperty("--accent", color);
+}
+
+setAccentColor();
 createFace();
 animateHands();  // called once here so hands update immediately on pageload
 setInterval(animateHands, 1000);
