@@ -119,11 +119,11 @@
 .center-dot {
     background-color: var(--secondary);
     border-radius: 50%;
-    width: 5vh;
-    height: 5vh;
+    width: 3vh;
+    height: 3vh;
     top: 50%;
     left: 50%;
-    transform: translate(-40%, -50%);
+    transform: translate(-50%, -50%);
     z-index: 5;
 }
 
@@ -180,15 +180,17 @@
     border-right: 20.25vh solid var(--secondary);
     top: 50%;
     transform: translateY(-50%);
-    height: 0.5vh;
+    height: 1vh;
 }
 
 .minute::after {
     position: absolute;
     content: '';
     border: 1vh solid transparent;
-    border-right: 23.5vh solid var(--accent);
+    border-right: 20.5vh solid var(--accent);
     top: 50%;
+    left: 3vh;
+    height: 0.25vh;
     transform: translate(-3vh, -50%);
 }
 
@@ -197,8 +199,8 @@
     content: '';
     left: 21vh;
     top: 50%;
-    border: 1.25vh solid transparent;
-    border-left: 4vh solid var(--secondary);
+    border: 1.5vh solid transparent;
+    border-left: 4.5vh solid var(--secondary);
     transform: translateY(-50%);
     z-index: 3;
 }
@@ -245,8 +247,9 @@
     position: absolute;
     content: '';
     border: 1.25vh solid transparent;
-    border-right: 17.25vh solid var(--accent);
+    border-right: 14.25vh solid var(--accent);
     top: 50%;
+    left: 3vh;
     transform: translate(-3vh, -50%);
     height: 0.5vh;
 }
