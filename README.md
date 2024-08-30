@@ -1,5 +1,7 @@
 # Clock
 
+![Screenshot](clock.png)
+
 A command line program to display the time in multiple formats. Some options include digital and analog, as well as an ncurses or purely printed display. Clock is written in Python.
 
 ## Options
