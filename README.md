@@ -1,10 +1,15 @@
 # Clock
 
-![Screenshot](clock.png)
+| ![Screenshot of ascii analog clock](clock.png) | ![Screenshot of web](web-clock.png) |
+| - | - |
+
+A simple way to tell the time
+
+## Command line
 
 A command line program to display the time in multiple formats. Some options include digital and analog, as well as an ncurses or purely printed display. Clock is written in Python.
 
-## Options
+### Options
 
 | Flag   | Description                                                     |
 | ------ | --------------------------------------------------------------- |
@@ -16,3 +21,7 @@ A command line program to display the time in multiple formats. Some options inc
 | **-p** | Print the time to stdout. This is the default.                  |
 | **-x** | Add a custom time. `./clock.py -x 12 00`                        |
 | **-t** | Just print the current time.                                    |
+
+## Web
+
+A working HTML representation of a watch face
