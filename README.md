@@ -7,7 +7,7 @@ A simple way to tell the time
 
 ## Command line
 
-A command line program to display the time in multiple formats. Some options include digital and analog, as well as an ncurses or purely printed display. Clock is written in Python.
+A command line program to display the time in multiple formats. Some options include digital/analog, and ncurses/printed display.
 
 ### Options
 
