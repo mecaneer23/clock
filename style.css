@@ -1,6 +1,7 @@
 :root {
     --accent: #6cb68b;
     --secondary: black;
+    font-family: "Noto Sans", sans-serif;
 }
 
 .github-corner {
